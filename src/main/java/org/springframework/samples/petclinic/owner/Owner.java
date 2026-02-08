@@ -51,7 +51,6 @@ public class Owner extends Person {
 
 	@Column
 	@NotBlank
-	//アドレス（ああ→いい）
 	private String address;
 
 	@Column
