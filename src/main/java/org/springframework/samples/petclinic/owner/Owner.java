@@ -56,6 +56,10 @@ public class Owner extends Person {
 	@Column
 	@NotBlank
 	private String city;
+	
+	@Column
+	@NotBlank
+	private String company;
 
 	@Column
 	@NotBlank
@@ -86,6 +90,14 @@ public class Owner extends Person {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+	
+	public String getCompany() {
+		return this.company ;
+	}
+	
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
 	public String getTelephone() {

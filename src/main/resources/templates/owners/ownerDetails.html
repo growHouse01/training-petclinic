@@ -31,6 +31,11 @@
       <th th:text="#{telephone}">Telephone</th>
       <td th:text="*{telephone}"></td>
     </tr>
+	
+	<tr>
+	     <th th:text="#{company}">Company</th>
+	     <td th:text="*{company}"></td>
+	   </tr>
   </table>
 
   <a th:href="@{__${owner.id}__/edit}" class="btn btn-primary" th:text="#{editOwner}">Edit
