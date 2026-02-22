@@ -56,7 +56,7 @@ public class Owner extends Person {
 	@Column
 	@NotBlank
 	private String city;
-	
+
 	@Column
 	@NotBlank
 	private String company;
@@ -69,8 +69,9 @@ public class Owner extends Person {
 	 */
 
 	@Pattern(regexp = "\\d{11}", message = "{telephone.invalid}")
-	private String telephone;
+	private String telephone;	
 
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "owner_id")
 	@OrderBy("name")
@@ -91,11 +92,11 @@ public class Owner extends Person {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	public String getCompany() {
-		return this.company ;
+		return this.company;
 	}
-	
+
 	public void setCompany(String company) {
 		this.company = company;
 	}
