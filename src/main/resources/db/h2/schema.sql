@@ -40,7 +40,7 @@ CREATE TABLE owners (
   address    VARCHAR(255),
   city       VARCHAR(80),
   telephone  VARCHAR(20),
-  company	 VARCHAR(255)
+  company	 VARCHAR(50)
 
 );
 CREATE INDEX owners_last_name ON owners (last_name);
