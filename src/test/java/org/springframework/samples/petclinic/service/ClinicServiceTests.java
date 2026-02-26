@@ -116,6 +116,7 @@ class ClinicServiceTests {
 		owner.setAddress("4, Evans Street");
 		owner.setCity("Wollongong");
 		owner.setTelephone("44444444444");
+		owner.setCompany("SUZUKI Co.Ltd");
 		this.owners.save(owner);
 		assertThat(owner.getId()).isNotZero();
 

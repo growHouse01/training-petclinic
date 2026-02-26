@@ -69,9 +69,8 @@ public class Owner extends Person {
 	 */
 
 	@Pattern(regexp = "\\d{11}", message = "{telephone.invalid}")
-	private String telephone;	
+	private String telephone;
 
-	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "owner_id")
 	@OrderBy("name")
