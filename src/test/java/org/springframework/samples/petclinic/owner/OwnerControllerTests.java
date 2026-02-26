@@ -108,7 +108,8 @@ class OwnerControllerTests {
 				.param("lastName", "Bloggs")
 				.param("address", "123 Caramel Street")
 				.param("city", "London")
-				.param("telephone", "13167616388"))
+				.param("telephone", "13167616388")
+				.param("company", "suzuki Co.,Ltd"))
 			.andExpect(status().is3xxRedirection());
 	}
 
@@ -179,7 +180,8 @@ class OwnerControllerTests {
 				.param("lastName", "Bloggs")
 				.param("address", "123 Caramel Street")
 				.param("city", "London")
-				.param("telephone", "16162915899"))
+				.param("telephone", "16162915899")
+				.param("company", "Suzuki Co.Ltd"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
@@ -191,7 +193,8 @@ class OwnerControllerTests {
 				.param("lastName", "Franklin")
 				.param("address", "110 W. Liberty St.")
 				.param("city", "Madison")
-				.param("telephone", "60855510233"))
+				.param("telephone", "60855510233")
+				.param("company", "Suzuki Co.ltd"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
@@ -236,6 +239,7 @@ class OwnerControllerTests {
 		owner.setAddress("Center Street");
 		owner.setCity("New York");
 		owner.setTelephone("01234567899");
+		owner.setCompany("Suzuki Co.Ltd");
 
 		when(owners.findById(pathOwnerId)).thenReturn(Optional.of(owner));
 
