@@ -90,21 +90,30 @@ class OwnerController {
 		// 初期画面
 		return "owners/findOwners";
 	}
-
 	@GetMapping("/owners")
 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
 			Model model) {
 		// allow parameterless GET request for /owners to return all records
+		String firstName = owner.getFirstName();
+		if (firstName == null) {
+			firstName = ""; // empty string signifies broadest possible search
+		}
 		String lastName = owner.getLastName();
 		if (lastName == null) {
 			lastName = ""; // empty string signifies broadest possible search
 		}
 
-		// find owners by last name
-		Page<Owner> ownersResults = findPaginatedForOwnersLastName(page, lastName);
+		// find owners by name
+		Page<Owner> ownersResults;
+		
+		if (!firstName.isEmpty()) {
+			ownersResults = findPaginatedForOwnersFirstName(page, firstName);
+		}else {
+			ownersResults = findPaginatedForOwnersLastName(page, lastName);
+		}
 		if (ownersResults.isEmpty()) {
 			// no owners found
-			result.rejectValue("lastName", "notFound", "not found");
+			result.rejectValue(firstName.isEmpty() ? "lastName" : "firstName", "notFound", "not found");
 			return "owners/findOwners";
 		}
 
@@ -117,7 +126,6 @@ class OwnerController {
 		// multiple owners found
 		return addPaginationModel(page, model, ownersResults);
 	}
-
 	private String addPaginationModel(int page, Model model, Page<Owner> paginated) {
 		List<Owner> listOwners = paginated.getContent();
 		model.addAttribute("currentPage", page);
@@ -125,6 +133,11 @@ class OwnerController {
 		model.addAttribute("totalItems", paginated.getTotalElements());
 		model.addAttribute("listOwners", listOwners);
 		return "owners/ownersList";
+	}
+	private Page<Owner> findPaginatedForOwnersFirstName(int page, String firstname) {
+		int pageSize = 5;
+		Pageable pageable = PageRequest.of(page - 1, pageSize);
+		return owners.findByFirstNameStartingWith(firstname, pageable);
 	}
 
 	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {

@@ -43,6 +43,7 @@ CREATE TABLE owners (
   company	 VARCHAR(50)
 
 );
+CREATE INDEX owners_first_name ON owners (first_name);
 CREATE INDEX owners_last_name ON owners (last_name);
 
 CREATE TABLE pets (
