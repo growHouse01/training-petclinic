@@ -43,7 +43,10 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
 	 * found)
 	 */
 	Page<Owner> findByFirstNameStartingWith(String firstName, Pageable pageable);
+
 	Page<Owner> findByLastNameStartingWith(String lastName, Pageable pageable);
+	
+	Page<Owner> findByLastNameStartingWithAndFirstNameStartingWith(String lastName, String firstName, Pageable pageable);
 
 	/**
 	 * Retrieve an {@link Owner} from the data store by id.
@@ -59,5 +62,7 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
 	 * input for id)
 	 */
 	Optional<Owner> findById(Integer id);
+
+	
 
 }

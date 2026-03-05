@@ -90,6 +90,7 @@ class OwnerController {
 		// 初期画面
 		return "owners/findOwners";
 	}
+
 	@GetMapping("/owners")
 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
 			Model model) {
@@ -104,16 +105,21 @@ class OwnerController {
 		}
 
 		// find owners by name
-		Page<Owner> ownersResults;
-		
-		if (!firstName.isEmpty()) {
+		Page<Owner> ownersResults = null;
+
+		if (lastName.isEmpty() && !firstName.isEmpty()) {
 			ownersResults = findPaginatedForOwnersFirstName(page, firstName);
-		}else {
+		}
+		else if (firstName.isEmpty() && !lastName.isEmpty()){
 			ownersResults = findPaginatedForOwnersLastName(page, lastName);
 		}
+		else {
+			ownersResults = findPaginatedForOwnersLastNameAndFirstName(page, lastName, firstName  );
+
+		}	
 		if (ownersResults.isEmpty()) {
 			// no owners found
-			result.rejectValue(firstName.isEmpty() ? "lastName" : "firstName", "notFound", "not found");
+			result.rejectValue("lastName", "notFound", "not found");
 			return "owners/findOwners";
 		}
 
@@ -126,6 +132,7 @@ class OwnerController {
 		// multiple owners found
 		return addPaginationModel(page, model, ownersResults);
 	}
+
 	private String addPaginationModel(int page, Model model, Page<Owner> paginated) {
 		List<Owner> listOwners = paginated.getContent();
 		model.addAttribute("currentPage", page);
@@ -134,6 +141,7 @@ class OwnerController {
 		model.addAttribute("listOwners", listOwners);
 		return "owners/ownersList";
 	}
+
 	private Page<Owner> findPaginatedForOwnersFirstName(int page, String firstname) {
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
@@ -144,6 +152,11 @@ class OwnerController {
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return owners.findByLastNameStartingWith(lastname, pageable);
+	}
+	private Page<Owner> findPaginatedForOwnersLastNameAndFirstName(int page,String lastname,String firstname){
+		int pageSize = 5;
+		Pageable pageable = PageRequest.of(page - 1, pageSize);
+		return owners.findByLastNameStartingWithAndFirstNameStartingWith(lastname, firstname,pageable);
 	}
 
 	@GetMapping("/owners/{ownerId}/edit")
