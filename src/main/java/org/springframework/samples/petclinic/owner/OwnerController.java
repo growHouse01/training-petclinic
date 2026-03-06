@@ -110,13 +110,13 @@ class OwnerController {
 		if (lastName.isEmpty() && !firstName.isEmpty()) {
 			ownersResults = findPaginatedForOwnersFirstName(page, firstName);
 		}
-		else if (firstName.isEmpty() && !lastName.isEmpty()){
+		else if (firstName.isEmpty() && !lastName.isEmpty()) {
 			ownersResults = findPaginatedForOwnersLastName(page, lastName);
 		}
 		else {
-			ownersResults = findPaginatedForOwnersLastNameAndFirstName(page, lastName, firstName  );
+			ownersResults = findPaginatedForOwnersLastNameAndFirstName(page, lastName, firstName);
 
-		}	
+		}
 		if (ownersResults.isEmpty()) {
 			// no owners found
 			result.rejectValue("lastName", "notFound", "not found");
@@ -153,10 +153,11 @@ class OwnerController {
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		return owners.findByLastNameStartingWith(lastname, pageable);
 	}
-	private Page<Owner> findPaginatedForOwnersLastNameAndFirstName(int page,String lastname,String firstname){
+
+	private Page<Owner> findPaginatedForOwnersLastNameAndFirstName(int page, String lastname, String firstname) {
 		int pageSize = 5;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
-		return owners.findByLastNameStartingWithAndFirstNameStartingWith(lastname, firstname,pageable);
+		return owners.findByLastNameStartingWithAndFirstNameStartingWith(lastname, firstname, pageable);
 	}
 
 	@GetMapping("/owners/{ownerId}/edit")
