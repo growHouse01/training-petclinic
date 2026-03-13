@@ -16,6 +16,7 @@
 </head>
 
 <body>
+	
 
   <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
     <div class="container-fluid">
@@ -47,11 +48,17 @@
             <span class="fa fa-search" aria-hidden="true"></span>
             <span th:text="#{findOwners}">Find owners</span>
           </li>
+		  
+		  <li th:replace="~{::menuItem ('/companys/find','companys','find companys','search',#{findCompany})}">
+	          <span class="fa fa-search" aria-hidden="true"></span>
+	          <span th:text="#{findCompanys}">Find companys</span>
+	        </li>
 
           <li th:replace="~{::menuItem ('/vets.html','vets','veterinarians','th-list',#{vets})}">
             <span class="fa fa-th-list" aria-hidden="true"></span>
             <span th:text="#{vets}">Veterinarians</span>
           </li>
+		  
 
           <li
             th:replace="~{::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','exclamation-triangle',#{error})}">

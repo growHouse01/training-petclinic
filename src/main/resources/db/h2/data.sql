@@ -33,6 +33,7 @@ INSERT INTO owners VALUES (default, 'Maria', 'Escobito', '345 Maple St.', 'Madis
 INSERT INTO owners VALUES (default, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435','HMT Co.,Ltd');
 INSERT INTO owners VALUES (default, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487','AKK Co.,Ltd');
 
+INSERT INTO companys (id, company_name, telephone) VALUES (1, 'HarmonyTech', '12345678901');
 
 INSERT INTO pets VALUES (default, 'Leo', '2010-09-07', 1, 1);
 INSERT INTO pets VALUES (default, 'Basil', '2012-08-06', 6, 2);
