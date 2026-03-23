@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'companys')}">
+
+<body>
+
+  <h2 th:text="#{company}">company</h2>
+  <form th:object="${company}" class="form-horizontal" id="add-company-form" method="post">	
+    <div class="form-group has-feedback">
+		<div>
+			<lable th:text="#{id}"></lable>
+			<span th:text="*{id}"></span>
+		</div><br>
+	  	<input th:replace="~{fragments/inputField :: input (#{companyName}, 'companyName','text')}" />
+		<input th:replace="~{fragments/inputField :: input (#{telephone}, 'telephone','text')}" /> 	 
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button th:with="text=${company.id == null} ? #{addCompany} : #{updateCompany}" class="btn btn-primary" type="submit"
+          th:text="${text}">Update Company</button>
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>
